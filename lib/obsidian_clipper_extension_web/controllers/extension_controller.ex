@@ -62,7 +62,7 @@ defmodule ObsidianClipperExtensionWeb.ExtensionController do
 
   defp get_file_stream(filename, _binary = true) do
     File.stream!(
-      Path.join([__DIR__, "../../obsidian_clipper_extension/browserextension/", filename]),
+      Path.join([:code.priv_dir(:obsidian_clipper_extension), "browser_extension/", filename]),
       [],
       2048
     )
@@ -70,7 +70,7 @@ defmodule ObsidianClipperExtensionWeb.ExtensionController do
 
   defp get_file_stream(filename, _binary) do
     File.stream!(
-      Path.join([__DIR__, "../../obsidian_clipper_extension/browserextension/", filename])
+      Path.join([:code.priv_dir(:obsidian_clipper_extension), "browser_extension/", filename])
     )
   end
 
