@@ -1,0 +1,19 @@
+{
+  "name": "Obsidian-Clipper - <%= name %>",
+  "description": "Save highlights from the web in obsidian - Created by Obisian Clipper",
+  "homepage_url": "https://jdotc.xyz",
+  "version": "1.0",
+  "manifest_version": 3,
+  "action": {
+    "default_icon": {
+      "16": "icon-16.png",
+      "48": "icon-48.png",
+      "128": "icon-128.png"
+    },
+    "default_title": "Click to clip to Obsidian"
+  },
+  "permissions": ["activeTab", "scripting"],
+  "background": {
+    "service_worker": "background.js"
+  }
+}
