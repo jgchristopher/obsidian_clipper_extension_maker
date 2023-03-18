@@ -1,18 +1,12 @@
 # ObsidianClipperExtension
 
-To start your Phoenix server:
+This is a simple services to help create a browser extension that should work in Chromium-based browsers. 
 
-  * Run `mix setup` to install and setup dependencies
-  * Start Phoenix endpoint with `mix phx.server` or inside IEx with `iex -S mix phx.server`
+## Usage
 
-Now you can visit [`localhost:4000`](http://localhost:4000) from your browser.
-
-Ready to run in production? Please [check our deployment guides](https://hexdocs.pm/phoenix/deployment.html).
-
-## Learn more
-
-  * Official website: https://www.phoenixframework.org/
-  * Guides: https://hexdocs.pm/phoenix/overview.html
-  * Docs: https://hexdocs.pm/phoenix
-  * Forum: https://elixirforum.com/c/phoenix-forum
-  * Source: https://github.com/phoenixframework/phoenix
+Once the `obsidian-clipper-extention.zip` file is downloaded follow these instructions. 
+1. Unzip the `obsidian-clipper-extention.zip` file. 
+2. Open a Chromium-based browser and navigate to the `Manage Extensions...` view. 
+3. You will need to enable `Developer mode`. 
+4. Once `Developer mode` is enabled, a `Load unpacked` button should become available. 
+5. Click the `Load unpacked` button and navigate to the unzipped `obsidian-clipper-extention` directory and select it. 
