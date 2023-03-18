@@ -1,5 +1,6 @@
 defmodule ObsidianClipperExtensionWeb.ExtensionController do
   use ObsidianClipperExtensionWeb, :controller
+  alias ObsidianClipperExtension.Browserextension.Manifest
 
   def index(conn, %{"name" => name, "bookmarklet_code" => bookmarklet_code}) do
     conn =
@@ -14,35 +15,28 @@ defmodule ObsidianClipperExtensionWeb.ExtensionController do
     zip =
       Zstream.zip([
         Zstream.entry(
-          "obsidian-clipper-#{name}-extension/bookmarklet.js",
-          bookmarklet_code |> URI.decode() |> Stream.unfold(&String.next_codepoint/1)
+          get_zip_filename(name, "bookmarklet.js"),
+          get_string_stream(bookmarklet_code)
         ),
         Zstream.entry(
-          "obsidian-clipper-#{name}-extension/background.js",
-          File.stream!(Path.join(__DIR__, "../../../browserextension/background.js"))
+          get_zip_filename(name, "background.js"),
+          get_file_stream("background.js", false)
         ),
         Zstream.entry(
-          "obsidian-clipper-#{name}-extension/manifest.json",
-          EEx.eval_file(Path.join(__DIR__, "../../../browserextension/manifest.json.eex"),
-            name: name
-          )
-          |> Stream.unfold(&String.next_codepoint/1)
+          get_zip_filename(name, "manifest.json"),
+          get_string_stream(Manifest.manifest(name))
         ),
         Zstream.entry(
-          "obsidian-clipper-#{name}-extension/icon-16.png",
-          File.stream!(Path.join(__DIR__, "../../../browserextension/icon-16.png"), [], 2048)
+          get_zip_filename(name, "icon-16.png"),
+          get_file_stream("icon-16.png", true)
         ),
         Zstream.entry(
-          "obsidian-clipper-#{name}-extension/icon-48.png",
-          File.stream!(Path.join(__DIR__, "../../../browserextension/icon-48.png"), [], 2048)
+          get_zip_filename(name, "icon-48.png"),
+          get_file_stream("icon-48.png", true)
         ),
         Zstream.entry(
-          "obsidian-clipper-#{name}-extension/icon-128.png",
-          File.stream!(
-            Path.join(__DIR__, "../../../browserextension/icon-128.png"),
-            [],
-            2048
-          )
+          get_zip_filename(name, "icon-128.png"),
+          get_file_stream("icon-128.png", true)
         )
       ])
 
@@ -59,5 +53,30 @@ defmodule ObsidianClipperExtensionWeb.ExtensionController do
 
   def index(conn, _params) do
     render(conn, :index)
+  end
+
+  defp get_zip_filename(extension_name, filename) do
+    extension_name = "obsidian-clipper-#{extension_name}-extension"
+    "#{extension_name}/#{filename}"
+  end
+
+  defp get_file_stream(filename, _binary = true) do
+    File.stream!(
+      Path.join([__DIR__, "../../obsidian_clipper_extension/browserextension/", filename]),
+      [],
+      2048
+    )
+  end
+
+  defp get_file_stream(filename, _binary) do
+    File.stream!(
+      Path.join([__DIR__, "../../obsidian_clipper_extension/browserextension/", filename])
+    )
+  end
+
+  defp get_string_stream(data) do
+    data
+    |> URI.decode()
+    |> Stream.unfold(&String.next_codepoint/1)
   end
 end
