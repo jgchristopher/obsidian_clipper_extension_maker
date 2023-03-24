@@ -52,7 +52,9 @@ defmodule ObsidianClipperExtensionWeb.ExtensionController do
   end
 
   def index(conn, _params) do
-    render(conn, :index)
+    conn
+    |> Plug.Conn.resp(:found, "")
+    |> Plug.Conn.put_resp_header("location", "https://github.com/jgchristopher/obsidian-clipper")
   end
 
   defp get_zip_filename(extension_name, filename) do
