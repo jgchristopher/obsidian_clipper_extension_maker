@@ -9,9 +9,13 @@ import Config
 
 # Configures the endpoint
 config :obsidian_clipper_extension, ObsidianClipperExtensionWeb.Endpoint,
+  http: [protocol_options: [max_request_line_length: 10_000]],
   url: [host: "localhost"],
   render_errors: [
-    formats: [html: ObsidianClipperExtensionWeb.ErrorHTML, json: ObsidianClipperExtensionWeb.ErrorJSON],
+    formats: [
+      html: ObsidianClipperExtensionWeb.ErrorHTML,
+      json: ObsidianClipperExtensionWeb.ErrorJSON
+    ],
     layout: false
   ],
   pubsub_server: ObsidianClipperExtension.PubSub,
@@ -24,7 +28,8 @@ config :obsidian_clipper_extension, ObsidianClipperExtensionWeb.Endpoint,
 #
 # For production it's recommended to configure a different adapter
 # at the `config/runtime.exs`.
-config :obsidian_clipper_extension, ObsidianClipperExtension.Mailer, adapter: Swoosh.Adapters.Local
+config :obsidian_clipper_extension, ObsidianClipperExtension.Mailer,
+  adapter: Swoosh.Adapters.Local
 
 # Configure esbuild (the version is required)
 config :esbuild,
