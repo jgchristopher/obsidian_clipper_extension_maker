@@ -6,7 +6,7 @@ defmodule ObsidianClipperExtensionWeb.Router do
     plug :fetch_session
     plug :fetch_live_flash
     plug :put_root_layout, {ObsidianClipperExtensionWeb.Layouts, :root}
-    plug :protect_from_forgery
+    # plug :protect_from_forgery
     plug :put_secure_browser_headers
   end
 
@@ -18,6 +18,13 @@ defmodule ObsidianClipperExtensionWeb.Router do
     pipe_through :browser
 
     get "/", ExtensionController, :index
+    post "/", ExtensionController, :other
+  end
+
+  scope "/api", ObsidianClipperExtensionWeb do
+    pipe_through :api
+
+    post "/extension", ExtensionApiController, :index
   end
 
   # Other scopes may use custom stacks.

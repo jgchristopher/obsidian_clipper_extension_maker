@@ -35,3 +35,4 @@ obsidian_clipper_extension-*.tar
 npm-debug.log
 /assets/node_modules/
 
+.env

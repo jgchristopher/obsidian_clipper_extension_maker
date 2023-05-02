@@ -47,7 +47,11 @@ defmodule ObsidianClipperExtension.MixProject do
       {:gettext, "~> 0.20"},
       {:jason, "~> 1.2"},
       {:plug_cowboy, "~> 2.5"},
-      {:zstream, "~> 0.6.4"}
+      {:zstream, "~> 0.6.4"},
+      {:ex_aws_s3, "~> 2.4"},
+      {:ex_aws, "~> 2.4"},
+      {:sweet_xml, "~> 0.7.3"},
+      {:hackney, "~> 1.18"}
     ]
   end
 

@@ -9,7 +9,6 @@ import Config
 
 # Configures the endpoint
 config :obsidian_clipper_extension, ObsidianClipperExtensionWeb.Endpoint,
-  http: [protocol_options: [max_request_line_length: 10_000]],
   url: [host: "localhost"],
   render_errors: [
     formats: [
@@ -60,6 +59,12 @@ config :logger, :console,
 
 # Use Jason for JSON parsing in Phoenix
 config :phoenix, :json_library, Jason
+
+config :ex_aws,
+  json_codec: Jason,
+  access_key_id: {:system, "AWS_ACCESS_KEY_ID"},
+  secret_access_key: {:system, "AWS_SECRET_ACCESS_KEY"},
+  region: "us-east-2"
 
 # Import environment specific config. This must remain at the bottom
 # of this file so it overrides the configuration defined above.
