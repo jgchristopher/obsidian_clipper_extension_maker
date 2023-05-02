@@ -45,6 +45,8 @@ defmodule ObsidianClipperExtensionWeb.ExtensionApiController do
     {:ok, link} =
       ExAws.Config.new(:s3) |> ExAws.S3.presigned_url(:get, "obsidianclipper", filename)
 
+    File.rm!("/tmp/#{filename}")
+
     render(conn, :index, link: link)
   end
 
