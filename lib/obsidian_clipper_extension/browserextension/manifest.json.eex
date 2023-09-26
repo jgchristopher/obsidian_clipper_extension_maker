@@ -6,9 +6,11 @@
   "manifest_version": 3,
   "action": {
     "default_icon": {
-      "16": "icon-16.png",
-      "48": "icon-48.png",
-      "128": "icon-128.png"
+      "16": "icon_16x16@2x.png",
+      "32": "icon_32x32@2x.png",
+      "128": "icon_128x128@2x.png"
+      "256": "icon_256x256@2x.png"
+      "512": "icon_512x512@2x.png"
     },
     "default_title": "Click to clip to Obsidian"
   },
